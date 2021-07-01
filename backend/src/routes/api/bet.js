@@ -115,10 +115,10 @@ router.post('/drawBet', async function (req, res) {
         let game = await Schedule.findOne({gameID: gameID})
         bet.draw = true
         if(bet.type == "home") {
-            bet.user.money += bet.money * game.awaybets / game.homebets
+            bet.user.money += bet.money * (game.homebets + game.awaybets) / game.homebets
         }
         else {
-            bet.user.money += bet.money * game.homebets / game.awaybets
+            bet.user.money += bet.money * (game.homebets + game.awaybets) / game.awaybets
         }
         bet.user.money = Math.floor(bet.user.money)
         await bet.save()

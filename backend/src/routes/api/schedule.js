@@ -63,7 +63,7 @@ router.get('/gamesById', async function (req, res) {
             "homeTeamAbbr": [homeTeamAbbr, visitorTeamAbbr],
             "visitorTeamAbbr": [homeTeamAbbr, visitorTeamAbbr],
             "gameStatus": "Final",
-        }).sort({"gameDateTime": -1}).limit(5)
+        }).sort({"gameDateTime": -1}).limit(4)
         res.status(200).send({
             type: 'success',
             games

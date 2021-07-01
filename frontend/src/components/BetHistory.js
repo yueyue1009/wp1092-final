@@ -101,7 +101,7 @@ function OneBet({ data, user, setUser, setBetHistory }){
         <Grid item>
           <Typography> ODDS: {odds.toFixed(3)}</Typography>
           <Typography> BET: {data.money}</Typography>
-          <Typography> GET: {(data.money*odds).toFixed(3)}</Typography>
+          <Typography> GET: {Math.floor(data.money*odds)}</Typography>
         </Grid>
         <Grid item>
           {(data.win === 'true') ? 
@@ -111,9 +111,9 @@ function OneBet({ data, user, setUser, setBetHistory }){
               <Button variant="outlined" onClick={() => handleDraw(data)}>Draw</Button>
             )
           :(data.win === 'false') ? (
-            <Typography>Lose</Typography>
+            <Button variant="outlined" disabled>Lose</Button>
           ):(
-            <Typography>Unknown</Typography>
+            <Button variant="outlined" disabled>Unknown</Button>
           )}
         </Grid>
       </Grid>
@@ -140,11 +140,21 @@ function BetHistory({ user, setUser }){
   return (
     <Paper className={classes.modal}>
       <List>
-        {betHistory.map((data, i) => {
-          return (
-            <OneBet data={data} user={user} setUser={setUser} setBetHistory={setBetHistory}/>
-          )
-        })}
+      {(betHistory.length === 0) ? (
+        <ListItem>
+          <Typography>No Betting History</Typography>
+        </ListItem>
+      )
+        : (
+          <>
+            {betHistory.map((data, i) => {
+              return (
+                <OneBet data={data} user={user} setUser={setUser} setBetHistory={setBetHistory}/>
+              )
+            })}
+          </>
+        )
+      }
       </List>
     </Paper>
   );

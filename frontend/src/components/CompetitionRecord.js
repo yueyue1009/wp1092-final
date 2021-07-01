@@ -12,7 +12,7 @@ import { getGameById } from '../api';
 const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: "center",
-  }
+  },
 }));
 
 function formattedDate(dateStr){
@@ -37,17 +37,19 @@ function CompetitionRecord({ home, visitor }){
     <List>
       <Divider variant='inset'/>
       {games.map((game, i) => {
+        const homeScore = (game.homeTeamAbbr === home) ? game.homeTeamScore : game.visitorTeamScore;
+        const visitorScore = (game.visitorTeamAbbr === visitor) ? game.visitorTeamScore : game.homeTeamScore;
         return (
           <>
             <ListItem key={i}>
               <Grid item xs={6}>
-                <Typography className={classes.text} style={(game.visitorTeamScore > game.homeTeamScore) ? {fontWeight:"bolder"}:{}}>{game.visitorTeamScore}</Typography>
+                <Typography className={classes.text} style={(visitorScore > homeScore) ? {fontWeight:"bolder"}:{}}>{visitorScore}</Typography>
               </Grid>
               <Grid item xs={1}>
                 <Typography className={classes.text}>{formattedDate(game.gameDateTime)}</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography className={classes.text} style={(game.visitorTeamScore < game.homeTeamScore) ? {fontWeight:"bolder"}:{}}>{game.homeTeamScore}</Typography>
+                <Typography className={classes.text} style={(homeScore > visitorScore) ? {fontWeight:"bolder"}:{}}>{homeScore}</Typography>
               </Grid>
             </ListItem>
             <Divider variant='inset'/>

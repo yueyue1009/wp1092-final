@@ -48,8 +48,8 @@ function BetContent({ game, setGame, user, setUser, isLogin}){
     setHomeModalOpen(true);
   };
   const updateOdds = () => {
-    setVisitorOdds((game.homebets / game.awaybets).toFixed(2));
-    setHomeOdds((game.awaybets / game.homebets).toFixed(2));
+    setVisitorOdds((1 + game.homebets / game.awaybets).toFixed(2));
+    setHomeOdds((1 + game.awaybets / game.homebets).toFixed(2));
   }
   const handleBet = async (type) =>{
     if (betAmount === "") {
@@ -177,7 +177,7 @@ function BetContent({ game, setGame, user, setUser, isLogin}){
                   <Typography variant="h4" style={{ color: "#4ef5ad" }}>W {game.homeTeamScore}</Typography> :
                   <Typography variant="h4" style={{ color: "#9e0214" }}>L {game.homeTeamScore}</Typography>
                 }
-                <Typography variant="body1">Odds:{visitorOdds}</Typography>
+                <Typography variant="body1">Odds:{homeOdds}</Typography>
               </Grid>
             ) : (
               <Grid item>
