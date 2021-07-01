@@ -10,7 +10,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const buildPath = path.join('./../frontend/build');
+const buildPath = path.resolve('./../frontend/build');
 // const buildPath = "./../frontend/build"
 const app = express();
 app.use(express.static(buildPath));
