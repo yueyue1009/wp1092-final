@@ -14,6 +14,9 @@ app.use(express.static(buildPath));
 // app.use(cors());
 app.use(express.json());
 app.use('/', routes);
+app.get('*', (req, res) => {
+  res.sendFile("./../frontend/build/index.html");
+});
 
 mongo.connect();
 
