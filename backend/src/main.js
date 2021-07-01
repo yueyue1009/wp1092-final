@@ -10,16 +10,17 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const buildPath = path.resolve('./../frontend/build');
-// const buildPath = "./../frontend/build"
+// const buildPath = path.resolve('./../frontend/build');
+const buildPath = path.join(__dirname, '../../frontend', 'build')
 const app = express();
 app.use(express.static(buildPath));
 // app.use(cors());
 app.use(express.json());
 app.use('/', routes);
+console.log(__dirname)
 app.get('*', (req, res) => {
-  // res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html'));
-  res.sendFile(path.resolve('./../frontend/build/index.html'));
+  res.sendFile(path.join(__dirname, '../../frontend', 'build', 'index.html'));
+  // res.sendFile(path.resolve('./../frontend/build/index.html'));
 });
 
 mongo.connect();
